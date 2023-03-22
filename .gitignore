@@ -1,0 +1,11 @@
+*.pyc
+*.pickle
+*.pth
+log*
+__pycache__
+slurm*
+.vscode
+test*
+evaluation/EgoNN/Egonn/
+evaluation/LCDNet/LCDNet/
+evaluation/LoGG3D-Net/LoGG3D-Net/
