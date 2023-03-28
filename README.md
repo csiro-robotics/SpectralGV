@@ -1,9 +1,9 @@
 # SpectralGV
-This repository is the official open-source implementation of the [RA-L](https://ieeexplore.ieee.org/document/10065560) paper: 
+This repository is the official open-source implementation of the paper: 
 
-> <b>[Spectral Geometric Verification: Re-Ranking Point Cloud Retrieval for Metric Localization](https://arxiv.org/abs/2210.04432)</b> <br>
+> <b>Spectral Geometric Verification: Re-Ranking Point Cloud Retrieval for Metric Localization</b> <br>
 > [Kavisha Vidanapathirana](https://kavisha725.github.io/), [Peyman Moghadam](https://people.csiro.au/m/p/peyman-moghadam), [Sridha Sridharan](https://staff.qut.edu.au/staff/s.sridharan), [Clinton Fookes](https://staff.qut.edu.au/staff/c.fookes)<br>
-> IEEE Robotics and Automation Letters (RA-L), Volume 8, Issue 5, May 2023.
+> IEEE Robotics and Automation Letters (RA-L), Volume 8, Issue 5, May 2023. [arXiv](https://arxiv.org/abs/2210.04432), [IEEEXplore](https://ieeexplore.ieee.org/document/10065560)
 
 This repository contains the code for:
 - Integration of *SpectralGV* re-ranking with 3 open-source metric localization architectures.
