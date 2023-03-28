@@ -16,7 +16,7 @@ This repository contains the code for:
 
 ### UPDATES
 - [x] Add environment setup instructions 
-- [ ] Add dataset preparation instructions
+- [x] Add dataset preparation instructions
 - [ ] Add SpetralGV + EgoNN
 - [ ] Add SpetralGV + LCDNet
 - [ ] Add SpetralGV + LoGG3D-Net
@@ -161,6 +161,9 @@ Our test set for each dataset is defined in pickle format.
   We follow the pickle generation convention of [EgoNN](https://github.com/jac99/Egonn).
   ```
   cd datasets/mulran
+  # For Sejong:
+  python generate_evaluation_sets.py --dataset_root <mulran_dataset_root_path>
+  # For DCC:
   python generate_evaluation_sets.py --dataset_root <mulran_dataset_root_path>
   
   cd ../southbay
@@ -168,15 +171,20 @@ Our test set for each dataset is defined in pickle format.
   
   cd ../kitti
   python generate_evaluation_sets.py --dataset_root <kitti_dataset_root_path>
+
+  cd ../alita
+  python generate_evaluation_sets.py --dataset_root <alita_dataset_root_path>
+
+  cd ../kitti360
+  python generate_evaluation_sets.py --dataset_root <kitti360_dataset_root_path>
   ```
-  TODO.
 
 </details>
 
 <br />
 
 ### Pretrained models
-We release the pre-trained models for LCDNet and LoGG3D-Net here. 
+We release the pre-trained models for LCDNet and LoGG3D-Net via Dropbox [here](https://www.dropbox.com/sh/qj5l2dh6gvm81a1/AAA32JqPMnQTuELPodY14xETa?dl=0). 
 For EgoNN we use the pre-trained model released by the authours (which is trained on the same train set).
 
 <br />

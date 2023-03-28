@@ -1,4 +1,5 @@
 # Test sets for Mulran dataset.
+# This file is adapted from: https://github.com/jac99/Egonn/blob/main/datasets/mulran/generate_evaluation_sets.py
 
 import argparse
 from typing import List
@@ -10,7 +11,6 @@ sys.path.append(os.path.join(os.path.dirname(__file__), '../..'))
 from datasets.mulran.mulran_raw import MulranSequence
 from datasets.base_datasets import EvaluationTuple, EvaluationSet, filter_query_elements
 
-DEBUG = False
 # KAIST 02
 MAP_TIMERANGE = (1566535940856033867, 1566536300000000000)
 QUERY_TIMERANGE = (1566536300000000000, 1566536825534173166)
@@ -55,20 +55,25 @@ def generate_evaluation_set(dataset_root: str, map_sequence_name: str, query_seq
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Generate evaluation sets for Mulran dataset')
-    parser.add_argument('--dataset_root', type=str, required=False, default='/mnt/088A6CBB8A6CA742/Datasets/MulRan/DCC/')
-    parser.add_argument('--min_displacement', type=float, default=10.0)#0.2)
+    parser.add_argument('--dataset_root', type=str, required=False, default='')
+    parser.add_argument('--sequence', type=str, required=False, default='Sejong')
+    parser.add_argument('--min_displacement', type=float, default=0.2)
     # Ignore query elements that do not have a corresponding map element within the given threshold (in meters)
-    parser.add_argument('--dist_threshold', type=float, default=5)
+    parser.add_argument('--dist_threshold', type=float, default=20)
     args = parser.parse_args()
 
+    # Sequences is a list of (map sequence, query sequence)
+    sequences = [('Sejong01', 'Sejong02')]
+    if args.sequence == 'DCC':
+        sequences = [('DCC_01', 'DCC_02')]
+        args.min_displacement = 10.0
+        args.dist_threshold = 5
+
+    
     print(f'Dataset root: {args.dataset_root}')
     print(f'Minimum displacement between consecutive anchors: {args.min_displacement}')
     print(f'Ignore query elements without a corresponding map element within a threshold [m]: {args.dist_threshold}')
-
-    # Sequences is a list of (map sequence, query sequence)
-    sequences = [('DCC_01', 'DCC_02')]
-    if DEBUG:
-        sequences = [('ParkingLot', 'ParkingLot')]
+    
 
     for map_sequence, query_sequence in sequences:
         print(f'Map sequence: {map_sequence}')

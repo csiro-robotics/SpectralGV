@@ -1,6 +1,5 @@
-# Test set for Kitti Sequence 00 dataset.
-# Following procedures in [cite papers Kitti for place reco] we use 170 seconds of drive from sequence for map generation
-# and the rest is left for queries
+# Test set for Kitti360 Sequence 09.
+# This script is adapted from: https://github.com/jac99/Egonn/blob/main/datasets/kitti/generate_evaluation_sets.py
 
 import numpy as np
 import argparse
@@ -66,7 +65,7 @@ if __name__ == '__main__':
     # kitti: /mnt/088A6CBB8A6CA742/Datasets/Kitti/dataset/
     # mulran: /mnt/088A6CBB8A6CA742/Datasets/MulRan/
     # apollo:
-    parser.add_argument('--dataset_root', type=str, required=False, default='/mnt/088A6CBB8A6CA742/Datasets/Kitti360/Dataset/')
+    parser.add_argument('--dataset_root', type=str, required=False, default='')
     parser.add_argument('--min_displacement', type=float, default=3.0)
     # Ignore query elements that do not have a corresponding map element within the given threshold (in meters)
     parser.add_argument('--dist_threshold', type=float, default=5.)

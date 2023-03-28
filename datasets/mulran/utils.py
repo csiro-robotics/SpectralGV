@@ -1,3 +1,5 @@
+# This file is directly copied from: https://github.com/jac99/Egonn/blob/main/datasets/mulran/utils.py
+
 import numpy as np
 import os
 from scipy.spatial import distance_matrix

@@ -1,3 +1,5 @@
+# This file is directly copied from: https://github.com/jac99/Egonn/blob/main/misc/poses.py
+
 import numpy as np
 import torch
 

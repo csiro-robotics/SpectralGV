@@ -1,5 +1,6 @@
-import numpy as np
+# This file is directly copied from: https://github.com/jac99/Egonn/blob/main/datasets/kitti/utils.py
 
+import numpy as np
 
 def velo2cam():
     R = np.array([

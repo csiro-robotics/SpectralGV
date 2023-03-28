@@ -1,6 +1,7 @@
 # Test set for Kitti Sequence 00 dataset.
-# Following procedures in [cite papers Kitti for place reco] we use 170 seconds of drive from sequence for map generation
+# Following procedures in EgoNN, we use 170 seconds of drive from sequence for map generation
 # and the rest is left for queries
+# This file is directly copied from: https://github.com/jac99/Egonn/blob/main/datasets/kitti/generate_evaluation_sets.py
 
 import numpy as np
 import argparse
@@ -13,8 +14,7 @@ from datasets.kitti.kitti_raw import KittiSequence
 from datasets.base_datasets import EvaluationTuple, EvaluationSet, filter_query_elements
 
 
-# MAP_TIMERANGE = (0, 170)
-MAP_TIMERANGE = (0, 100)
+MAP_TIMERANGE = (0, 170)
 
 def get_scans(sequence: KittiSequence, min_displacement: float = 0.1, ts_range: tuple = None) -> List[EvaluationTuple]:
     # Get a list of all point clouds from the sequence (the full sequence or test split only)
@@ -63,10 +63,7 @@ def generate_evaluation_set(dataset_root: str, map_sequence: str, min_displaceme
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Generate evaluation sets for KItti dataset')
-    # kitti: /mnt/088A6CBB8A6CA742/Datasets/Kitti/dataset/
-    # mulran: /mnt/088A6CBB8A6CA742/Datasets/MulRan/
-    # apollo:
-    parser.add_argument('--dataset_root', type=str, required=False, default='/mnt/088A6CBB8A6CA742/Datasets/Kitti/dataset/')
+    parser.add_argument('--dataset_root', type=str, required=False, default='')
     parser.add_argument('--min_displacement', type=float, default=0.1)
     # Ignore query elements that do not have a corresponding map element within the given threshold (in meters)
     parser.add_argument('--dist_threshold', type=float, default=5.)
@@ -74,7 +71,7 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     # Sequences are fixed
-    sequence = '05'
+    sequence = '00'
     print(f'Dataset root: {args.dataset_root}')
     print(f'Kitti sequence: {sequence}')
     print(f'Minimum displacement between consecutive anchors: {args.min_displacement}')

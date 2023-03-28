@@ -1,3 +1,5 @@
+# This file is directly copied from: https://github.com/jac99/Egonn/blob/main/third_party/pypcd.py
+
 """
 Read and write PCL .pcd files in python.
 dimatura@cmu.edu, 2013-2018

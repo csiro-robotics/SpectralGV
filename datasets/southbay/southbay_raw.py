@@ -1,4 +1,5 @@
 # Classes and functions to read Apollo SouthBay dataset
+# This file is directly copied from: https://github.com/jac99/Egonn/blob/main/datasets/southbay/southbay_raw.py
 
 import os
 import sys
@@ -6,11 +7,10 @@ import numpy as np
 import csv
 from typing import List
 
-import pypcd as pypcd
 sys.path.append(os.path.join(os.path.dirname(__file__), '../..'))
 from datasets.point_clouds_utils import PointCloudLoader
 import datasets.poses_utils as poses
-
+import datasets.southbay.pypcd as pypcd
 
 class GroundTruthPoses:
     def __init__(self, pose_filepath):

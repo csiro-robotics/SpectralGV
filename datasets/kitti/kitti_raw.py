@@ -1,4 +1,5 @@
 # Functions and classes operating on a raw Kitti dataset
+# This file is directly copied from: https://github.com/jac99/Egonn/blob/main/datasets/kitti/kitti_raw.py
 
 import numpy as np
 import os

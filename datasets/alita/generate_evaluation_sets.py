@@ -1,8 +1,5 @@
 # Generate evaluation sets
-# - Map point clouds are taken from MapData folder
-# - Query point clouds are taken from TestData
-# For each area (BaylandsToSeafood, ColumbiaPark, HighWay237, MathildaAVE, SanJoseDowntown, SunnyvaleBigloop) a
-# separate evaluation set is crated. We do not match clouds from different areas.
+# This script is adapted from: https://github.com/jac99/Egonn/blob/main/datasets/southbay/generate_evaluation_sets.py
 
 import argparse
 import numpy as np
@@ -14,7 +11,6 @@ from scipy.spatial.transform import Rotation as R
 
 sys.path.append(os.path.join(os.path.dirname(__file__), '../..'))
 
-from datasets.southbay.southbay_raw import SouthBayDataset
 from datasets.base_datasets import EvaluationTuple, EvaluationSet, filter_query_elements
 
 def get_pose_transform(pose6d):
@@ -95,7 +91,7 @@ def generate_evaluation_set(dataset_root: str, area: str, min_displacement: floa
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Generate evaluation sets for UGV dataset')
-    parser.add_argument('--dataset_root', type=str, required=False, default='/home/vid020/UGV/VAL/')#'/mnt/088A6CBB8A6CA742/Datasets/AirLab_UGV/VAL/')
+    parser.add_argument('--dataset_root', type=str, required=False, default='')
     parser.add_argument('--min_displacement', type=float, default=0.01)
     # Ignore query elements that do not have a corresponding map element within the given threshold (in meters)
     parser.add_argument('--dist_threshold', type=float, default=5)

@@ -1,4 +1,6 @@
 # Base dataset classes, inherited by dataset-specific classes
+# This file is adapted from: https://github.com/jac99/Egonn/blob/main/datasets/base_datasets.py
+
 import os
 import sys
 import pickle

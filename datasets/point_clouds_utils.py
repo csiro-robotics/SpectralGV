@@ -1,3 +1,5 @@
+# This file is adapted from: https://github.com/jac99/Egonn/blob/main/misc/point_clouds.py
+
 import copy
 import os
 

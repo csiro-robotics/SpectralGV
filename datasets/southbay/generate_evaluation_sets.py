@@ -4,6 +4,8 @@
 # For each area (BaylandsToSeafood, ColumbiaPark, HighWay237, MathildaAVE, SanJoseDowntown, SunnyvaleBigloop) a
 # separate evaluation set is crated. We do not match clouds from different areas.
 
+# This file is directly copied from: https://github.com/jac99/Egonn/blob/main/datasets/southbay/generate_evaluation_sets.py
+
 import argparse
 import numpy as np
 from typing import List
@@ -55,8 +57,8 @@ def generate_evaluation_set(ds: SouthBayDataset, area: str, min_displacement: fl
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Generate evaluation sets for Apollo SouthBay dataset')
-    parser.add_argument('--dataset_root', type=str, required=False, default='/mnt/088A6CBB8A6CA742/ApolloSouthBay/Dataset/')
-    parser.add_argument('--min_displacement', type=float, default=20.0)
+    parser.add_argument('--dataset_root', type=str, required=False, default='')
+    parser.add_argument('--min_displacement', type=float, default=1.0)
     # Ignore query elements that do not have a corresponding map element within the given threshold (in meters)
     parser.add_argument('--dist_threshold', type=float, default=5)
 
