@@ -6,15 +6,17 @@ This repository is the official open-source implementation of the paper:
 > IEEE Robotics and Automation Letters (RA-L), Volume 8, Issue 5, May 2023. [arXiv](https://arxiv.org/abs/2210.04432), [IEEEXplore](https://ieeexplore.ieee.org/document/10065560)
 
 This repository contains the code for:
-- Integration of *SpectralGV* re-ranking with 3 open-source metric localization architectures.
-- Evaluation of place recognition and metric localization with and without re-ranking on 5 open-source datasets.
+- A quick demo to test *SpectralGV* (without the need for datasets or architecture dependencies).
+- Integration of *SpectralGV* re-ranking with 3 open-source metric localization architectures ([EgoNN](https://github.com/jac99/Egonn), [LCDNet](https://github.com/robot-learning-freiburg/LCDNet) and [LoGG3D-Net](https://github.com/csiro-robotics/LoGG3D-Net)).
+- Evaluation of place recognition and metric localization with and without re-ranking on 5 open-source datasets ([MulRan](https://sites.google.com/view/mulran-pr/download), [Apollo-Southbay](https://developer.apollo.auto/southbay.html), [KITTI](http://semantic-kitti.org/dataset.html#download), [ALITA](https://github.com/MetaSLAM/ALITA) and [KITTI-360](https://www.cvlibs.net/datasets/kitti-360/user_login.php)).
 
 ### UPDATES
 - [x] Add environment setup instructions 
 - [x] Add dataset preparation instructions
-- [x] Add SpetralGV + EgoNN
-- [ ] Add SpetralGV + LCDNet
-- [ ] Add SpetralGV + LoGG3D-Net
+- [x] Add quick demo
+- [x] Add SpectralGV + EgoNN
+- [ ] Add SpectralGV + LCDNet
+- [ ] Add SpectralGV + LoGG3D-Net
 
 ## Method overview.
 *SpectralGV* is an efficient spectral method for geometric verification based re-ranking of point clouds. *SpectralGV* allows integration with any metric-localization architecture that extracts both local and global features for a given point cloud, without modifying the architectures and without further training of learning-based methods. 
@@ -22,16 +24,12 @@ This repository contains the code for:
 ![](./docs/reranking_pipeline.png)
 
 
-## Set up
-
-### Prerequisites
-This project has been tested on Ubuntu 22.04. Set up the requirements as follows:
-
+## Demo
 
 <details>
-  <summary><b>Set up environment</b></summary><br/>
+  <summary><b>Set up base environment</b></summary><br/>
   
-  - Create [conda](https://docs.conda.io/en/latest/) environment with pytorch:
+  - Create [conda](https://docs.conda.io/en/latest/) environment with python:
   ```bash
   conda create --name sgv_env python=3.9.4
   conda activate sgv_env
@@ -41,16 +39,53 @@ This project has been tested on Ubuntu 22.04. Set up the requirements as follows
   pip3 install torch torchvision torchaudio
   # Make sure the pytorch cuda version matches your output of 'nvcc --version'
   ```
+  - Install [Open3d](https://github.com/isl-org/Open3D):
+  ```bash
+  pip install open3d
+  ```
+  - Test installation using:
+  ```bash
+  python -c "import torch ; import open3d as o3d ; print(torch.cuda.is_available())"
+  ```
 
 </details>
 
+<br />
+
+Now you can run the quick demo:
+
+<details>
+  <summary><b>Demo</b></summary><br/>
+  
+  This demo scriipt evaluates the EgoNN global and local features for the Place Recognition task on KITTI 00. It outputs results for place recognition both with and without re-ranking using SpectralGV
+  - Download the demo data (~144 MB) from Dropbox [here](https://www.dropbox.com/sh/qj5l2dh6gvm81a1/AAA32JqPMnQTuELPodY14xETa?dl=0):
+  ```bash
+  cd demo
+  wget --output-document demo_pickles.zip https://dl.dropboxusercontent.com/s/kc12nvw5ay18tck/demo_pickles.zip?dl=0
+  unzip demo_pickles.zip
+  ```
+  - run demo
+  ```bash
+  python demo.py
+  ```
+
+</details>
+
+<br />
+
+## Prerequisites
+
+### Environment dependencies
+This project has been tested on Ubuntu 22.04. Set up the requirements as follows:
+
+- Please set up the base conda environment and test the quick demo above. 
+- To recreate other results in the paper, the following dependencies are required:
 
 <details>
   <summary><b>Add dependencies for LoGG3D-Net:</b></summary><br/>
   
-  - Install [Open3d](https://github.com/isl-org/Open3D), [Torchpack](https://github.com/zhijian-liu/torchpack):
+  - Install [Torchpack](https://github.com/zhijian-liu/torchpack):
   ```bash
-  pip install open3d
   pip install torchpack
   ```
   - Install torchsparse-1.4.0
@@ -65,7 +100,7 @@ This project has been tested on Ubuntu 22.04. Set up the requirements as follows
   ```
   - Test installation using:
   ```bash
-  python -c "import torch ; import torchsparse ; print(torch.cuda.is_available())"
+  python -c "import torch ; import torchsparse ; print('OK')"
   ```
 
   > **Note**: If stuck, see here for more details: https://github.com/csiro-robotics/LoGG3D-Net
@@ -87,7 +122,7 @@ This project has been tested on Ubuntu 22.04. Set up the requirements as follows
   ```
   - Test installation using:
   ```bash
-  python -c "import torch ; import MinkowskiEngine as ME"
+  python -c "import torch ; import MinkowskiEngine as ME ; print('OK')"
   ```
 
   > **Note**: If stuck, see here for more details: https://github.com/jac99/Egonn
@@ -186,7 +221,7 @@ Our test set for each dataset is defined in pickle format.
 
 ### Pretrained models
 We release the pre-trained models for LCDNet and LoGG3D-Net via Dropbox [here](https://www.dropbox.com/sh/qj5l2dh6gvm81a1/AAA32JqPMnQTuELPodY14xETa?dl=0). 
-For EgoNN we use the pre-trained model released by the authours (which is trained on the same train set).
+For EgoNN we use the pre-trained model released by its authours (which is trained on the same train set).
 
 <br />
 

@@ -10,3 +10,4 @@ evaluation/EgoNN/Egonn/
 evaluation/LCDNet/LCDNet/
 evaluation/LoGG3D-Net/LoGG3D-Net/
 *debug.py
+*.zip
