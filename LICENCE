@@ -33,6 +33,45 @@ TorchSparse https://github.com/mit-han-lab/torchsparse
 
 This software is licensed under the MIT License.
 ___________________________________________________________________
+___________________________________________________________________
+MinkowskiEngine https://nvidia.github.io/MinkowskiEngine/
+
+This software is licensed under the MIT License.
+___________________________________________________________________
+___________________________________________________________________
+spconv https://github.com/traveller59/spconv
+
+This software is licensed under the  Apache-2.0 license.
+___________________________________________________________________
+___________________________________________________________________
+OpenPCDet https://github.com/open-mmlab/OpenPCDet
+
+This software is licensed under the Apache-2.0 license.
+___________________________________________________________________
+___________________________________________________________________
+faiss https://github.com/facebookresearch/faiss
+
+This software is licensed under the MIT License.
+___________________________________________________________________
+
+___________________________________________________________________
+EgoNN https://github.com/jac99/Egonn
+
+This software is licensed under the MIT License.
+___________________________________________________________________
+
+___________________________________________________________________
+LoGG3D-Net https://github.com/csiro-robotics/LoGG3D-Net
+
+This software is licensed under the CSIRO Open Source Software Licence Agreement (variation of the BSD / MIT License).
+___________________________________________________________________
+
+___________________________________________________________________
+LCDNet https://github.com/robot-learning-freiburg/LCDNet
+
+This software is licensed under the GNU General Public License v3.0.
+___________________________________________________________________
+
 
   
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

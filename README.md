@@ -1,14 +1,17 @@
 # SpectralGV
-This repository is an open-source implementation of the RA-L paper: [Spectral Geometric Verification: Re-Ranking Point Cloud Retrieval for Metric Localization](https://ieeexplore.ieee.org/document/10065560). 
+This repository is the official open-source implementation of the [RA-L](https://ieeexplore.ieee.org/document/10065560) paper: 
 
-Paper Pre-print: https://arxiv.org/abs/2210.04432
+> <b>[Spectral Geometric Verification: Re-Ranking Point Cloud Retrieval for Metric Localization](https://arxiv.org/abs/2210.04432)</b> <br>
+> [Kavisha Vidanapathirana](https://kavisha725.github.io/), [Peyman Moghadam](https://people.csiro.au/m/p/peyman-moghadam), [Sridha Sridharan](https://staff.qut.edu.au/staff/s.sridharan), [Clinton Fookes](https://staff.qut.edu.au/staff/c.fookes)<br>
+
+This repository contains the code for:
+- Integration of *SpectralGV* re-ranking with 3 open-source metric localization architectures.
+- Evaluation of place recognition and metric localization with and without re-ranking on 5 open-source datasets.
 
 ## Method overview.
 *SpectralGV* is an efficient spectral method for geometric verification based re-ranking of point clouds. *SpectralGV* allows integration with any metric-localization architecture that extracts both local and global features for a given point cloud, without modifying the architectures and without further training of learning-based methods. 
 
-In this repository, we provide code and pretrained models for integrating *SpectralGV* with [EgoNN](https://ieeexplore.ieee.org/document/9645340) (RA-L'2022), [LCDNet](https://ieeexplore.ieee.org/document/9723505) (T-Ro'2022), and [LoGG3D-Net](https://ieeexplore.ieee.org/document/9811753) (ICRA'2022).
-
-![](./utils/docs/SGV_pipeline.png)
+![](./docs/reranking_pipeline.png)
 
 
 ### UPDATES
@@ -27,7 +30,7 @@ This project has been tested on Ubuntu 22.04. Set up the requirements as follows
 <details>
   <summary><b>Set up environment</b></summary><br/>
   
-  - Create [conda](https://docs.conda.io/en/latest/) environment with pytorch and open3d:
+  - Create [conda](https://docs.conda.io/en/latest/) environment with pytorch:
   ```bash
   conda create --name sgv_env python=3.9.4
   conda activate sgv_env
@@ -179,7 +182,7 @@ For EgoNN we use the pre-trained model released by the authours (which is traine
 <br />
 
 ## Evaluation
-We integrate *SpectralGV* with the below architectures: 
+We integrate *SpectralGV* with the following architectures: 
 
 <details>
   <summary><b>EgoNN + SpectralGV</b></summary><br/>
@@ -232,7 +235,10 @@ If you find this work useful in your research, please cite:
 
 
 ## Acknowledgement
-Functions from 3rd party have been acknowledged at the respective function definitions or readme files. This project was mainly inspired by the following: [SpectralMatching](https://ieeexplore.ieee.org/document/1544893) and [PointDSC](https://github.com/XuyangBai/PointDSC).
+Functions from 3rd party have been acknowledged at the respective function definitions or readme files. 
+
+*SpectralGV* was mainly inspired by [SpectralMatching](https://ieeexplore.ieee.org/document/1544893) and [PointDSC](https://github.com/XuyangBai/PointDSC).
+The evaluation scripts used in this project are adapted from [EgoNN](https://github.com/jac99/Egonn). 
 
 ## Contact
 For questions/feedback, 
