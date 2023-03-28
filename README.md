@@ -3,23 +3,24 @@ This repository is the official open-source implementation of the [RA-L](https:/
 
 > <b>[Spectral Geometric Verification: Re-Ranking Point Cloud Retrieval for Metric Localization](https://arxiv.org/abs/2210.04432)</b> <br>
 > [Kavisha Vidanapathirana](https://kavisha725.github.io/), [Peyman Moghadam](https://people.csiro.au/m/p/peyman-moghadam), [Sridha Sridharan](https://staff.qut.edu.au/staff/s.sridharan), [Clinton Fookes](https://staff.qut.edu.au/staff/c.fookes)<br>
+> IEEE Robotics and Automation Letters (RA-L), Volume 8, Issue 5, May 2023.
 
 This repository contains the code for:
 - Integration of *SpectralGV* re-ranking with 3 open-source metric localization architectures.
 - Evaluation of place recognition and metric localization with and without re-ranking on 5 open-source datasets.
+
+### UPDATES
+- [x] Add environment setup instructions 
+- [x] Add dataset preparation instructions
+- [x] Add SpetralGV + EgoNN
+- [ ] Add SpetralGV + LCDNet
+- [ ] Add SpetralGV + LoGG3D-Net
 
 ## Method overview.
 *SpectralGV* is an efficient spectral method for geometric verification based re-ranking of point clouds. *SpectralGV* allows integration with any metric-localization architecture that extracts both local and global features for a given point cloud, without modifying the architectures and without further training of learning-based methods. 
 
 ![](./docs/reranking_pipeline.png)
 
-
-### UPDATES
-- [x] Add environment setup instructions 
-- [x] Add dataset preparation instructions
-- [ ] Add SpetralGV + EgoNN
-- [ ] Add SpetralGV + LCDNet
-- [ ] Add SpetralGV + LoGG3D-Net
 
 ## Set up
 
@@ -205,6 +206,10 @@ We integrate *SpectralGV* with the following architectures:
   cp -r SGV_EgoNN/ Egonn/eval/
   cd Egonn/eval/SGV_EgoNN/
   ```
+  - Evaluate place recognition and metric localization with and without *SpectralGV* re-ranking:
+  ```
+  python eval_egonn_sgv.py --dataset_type <dataset_eg_'kitti'> --dataset_root <dataset_root_path>
+  ```
 
 </details>
 
@@ -245,7 +250,7 @@ If you find this work useful in your research, please cite:
 ## Acknowledgement
 Functions from 3rd party have been acknowledged at the respective function definitions or readme files. 
 
-*SpectralGV* was mainly inspired by [SpectralMatching](https://ieeexplore.ieee.org/document/1544893) and [PointDSC](https://github.com/XuyangBai/PointDSC).
+*SpectralGV* was mainly inspired by [SpectralMatching](https://ieeexplore.ieee.org/document/1544893), [PointDSC](https://github.com/XuyangBai/PointDSC) and [SC2_PCR](https://github.com/ZhiChen902/SC2-PCR).
 The evaluation scripts used in this project are adapted from [EgoNN](https://github.com/jac99/Egonn). 
 
 ## Contact
