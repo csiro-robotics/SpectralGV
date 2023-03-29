@@ -6,7 +6,7 @@ This repository is the official open-source implementation of the paper:
 > IEEE Robotics and Automation Letters (RA-L), Volume 8, Issue 5, May 2023. [arXiv](https://arxiv.org/abs/2210.04432), [IEEEXplore](https://ieeexplore.ieee.org/document/10065560)
 
 This repository contains the code for:
-- A quick demo to test *SpectralGV* (without the need for datasets or architecture dependencies).
+- A quick demo of *SpectralGV* (without the need for datasets or architecture dependencies).
 - Integration of *SpectralGV* re-ranking with 3 open-source metric localization architectures ([EgoNN](https://github.com/jac99/Egonn), [LCDNet](https://github.com/robot-learning-freiburg/LCDNet) and [LoGG3D-Net](https://github.com/csiro-robotics/LoGG3D-Net)).
 - Evaluation of place recognition and metric localization with and without re-ranking on 5 open-source datasets ([MulRan](https://sites.google.com/view/mulran-pr/download), [Apollo-Southbay](https://developer.apollo.auto/southbay.html), [KITTI](http://semantic-kitti.org/dataset.html#download), [ALITA](https://github.com/MetaSLAM/ALITA) and [KITTI-360](https://www.cvlibs.net/datasets/kitti-360/user_login.php)).
 
@@ -57,17 +57,38 @@ Now you can run the quick demo:
 <details>
   <summary><b>Demo</b></summary><br/>
   
-  This demo scriipt evaluates the EgoNN global and local features for the Place Recognition task on KITTI 00. It outputs results for place recognition both with and without re-ranking using SpectralGV
+  This demo script evaluates the EgoNN global and local features for the Place Recognition task on KITTI360 09. It outputs results for place recognition both with and without re-ranking using SpectralGV.
   - Download the demo data (~144 MB) from Dropbox [here](https://www.dropbox.com/sh/qj5l2dh6gvm81a1/AAA32JqPMnQTuELPodY14xETa?dl=0):
   ```bash
   cd demo
-  wget --output-document demo_pickles.zip https://dl.dropboxusercontent.com/s/kc12nvw5ay18tck/demo_pickles.zip?dl=0
+  wget --output-document demo_pickles.zip https://dl.dropboxusercontent.com/s/4elvyix9pp36469/demo_pickles.zip?dl=0
   unzip demo_pickles.zip
   ```
-  - run demo
+  Run the demo:
+
+  - SpectralGV
   ```bash
-  python demo.py
+  python demo_spectral_gv.py --n_topk 2
+  python demo_spectral_gv.py --n_topk 20
+  python demo_spectral_gv.py --n_topk 200
   ```
+  - RANSAC-GV
+  ```bash
+  python demo_ransac_gv.py --n_topk 2
+  python demo_ransac_gv.py --n_topk 20
+  python demo_ransac_gv.py --n_topk 200
+  ```
+  - alpha-QE
+  ```bash
+  python demo_alpha_qe.py --n_topk 2
+  python demo_alpha_qe.py --n_topk 20
+  python demo_alpha_qe.py --n_topk 200
+  ```
+
+  Observations:
+  - The 2 geometric verifciation methods (SpectralGV and RANSAC-GV) show increasing performance with increasing ```n_topk```.
+  - alpha-QE shows decreasing performance with increasing ```n_topk``` and is therefore not suitable for point cloud re-ranking. 
+  - Out of the 2 geometric verifciation methods, RANSAC-GV is inefficient at high ```n_topk``` values, thus limiting it's practical use. SpectralGV maintains almost constant runtime.
 
 </details>
 

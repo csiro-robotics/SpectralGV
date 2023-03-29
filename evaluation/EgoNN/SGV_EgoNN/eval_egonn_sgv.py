@@ -17,7 +17,12 @@ import copy
 import torch
 import MinkowskiEngine as ME
 
-sys.path.append(os.path.join(os.path.dirname(__file__), '../..'))
+from sgv_utils import *
+
+sys.path.append(os.path.join(os.path.dirname(__file__), '../../../../../'))
+from datasets.base_datasets import get_pointcloud_loader
+
+sys.path.append(os.path.join(os.path.dirname(__file__), '../../'))
 from misc.poses import m2ypr, relative_pose
 from datasets.mulran.utils import relative_pose as mulran_relative_pose
 from datasets.kitti.utils import get_relative_pose as kitti_relative_pose
@@ -27,8 +32,7 @@ from models.model_factory import model_factory
 from misc.poses import apply_transform
 from misc.utils import ModelParams
 from datasets.dataset_utils import preprocess_pointcloud
-from datasets.base_datasets import EvaluationTuple, EvaluationSet, get_pointcloud_loader
-from sgv_utils import *
+from datasets.base_datasets import EvaluationTuple, EvaluationSet
 
 print('\n' + ' '.join([sys.executable] + sys.argv))
 

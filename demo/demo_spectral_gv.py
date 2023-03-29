@@ -1,6 +1,6 @@
 # This script is adapted from: https://github.com/jac99/Egonn/blob/main/eval/evaluate.py
-# This demo scriipt evaluates the EgoNN global and local features for the Place Recognition task on KITTI 00.
-# Outputs results for place recognition both with and without re-ranking using SpectralGV
+# This demo script evaluates the EgoNN global and local features for the Place Recognition task on KITTI360 09.
+# Outputs results for place recognition both with and without re-ranking using SpectralGV.
 
 import argparse
 import numpy as np
@@ -236,10 +236,10 @@ class MetLocEvaluatorDemo(EvaluatorDemo):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Evaluate MinkLoc model')
-    parser.add_argument('--dataset_type', type=str, required=False, default='kitti')
-    parser.add_argument('--eval_set', type=str, required=False, default='kitti_00_eval.pickle', help='File name')
+    parser.add_argument('--dataset_type', type=str, required=False, default='kitti360')
+    parser.add_argument('--eval_set', type=str, required=False, default='kitti360_09_3.0_eval.pickle', help='File name')
     parser.add_argument('--radius', type=float, nargs='+', default=[5, 20], help='True Positive thresholds in meters')
-    parser.add_argument('--n_k', type=int, nargs='+', default=128, help='Number of keypoints to calculate repeatability')
+    parser.add_argument('--n_topk', type=int, default=2, help='Number of keypoints to calculate repeatability')
     args = parser.parse_args()
 
     print(f'Dataset type: {args.dataset_type}')
@@ -254,6 +254,6 @@ if __name__ == "__main__":
     print('Device: {}'.format(device))
 
 
-    evaluator = MetLocEvaluatorDemo(args.dataset_type, args.eval_set, device, radius=args.radius, k=20)
+    evaluator = MetLocEvaluatorDemo(args.dataset_type, args.eval_set, device, radius=args.radius, k=args.n_topk)
     global_metrics= evaluator.evaluate()
     evaluator.print_results(global_metrics)
