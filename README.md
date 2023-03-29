@@ -1,5 +1,5 @@
 # SpectralGV
-This repository is the official open-source implementation of the paper: 
+This repository is the official open-source implementation of the paper SpectralGV, RA-L 2023: 
 
 > <b>Spectral Geometric Verification: Re-Ranking Point Cloud Retrieval for Metric Localization</b> <br>
 > [Kavisha Vidanapathirana](https://kavisha725.github.io/), [Peyman Moghadam](https://people.csiro.au/m/p/peyman-moghadam), [Sridha Sridharan](https://staff.qut.edu.au/staff/s.sridharan), [Clinton Fookes](https://staff.qut.edu.au/staff/c.fookes)<br>
