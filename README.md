@@ -57,8 +57,8 @@ Now you can run the quick demo:
 <details>
   <summary><b>Demo</b></summary><br/>
   
-  This demo script evaluates the EgoNN global and local features for the Place Recognition task on KITTI360 09. It outputs results for place recognition both with and without re-ranking using SpectralGV.
-  - Download the demo data (~144 MB) from Dropbox [here](https://www.dropbox.com/sh/qj5l2dh6gvm81a1/AAA32JqPMnQTuELPodY14xETa?dl=0):
+  This demo script re-creates the results of Tab. 2 in our paper on the KITTI360 09 dataset. It outputs results for place recognition both with and without re-ranking using SpectralGV, RANSAC-GV and alpha-QE.
+  - Download the demo data (~75 MB) from Dropbox [here](https://www.dropbox.com/sh/qj5l2dh6gvm81a1/AAA32JqPMnQTuELPodY14xETa?dl=0):
   ```bash
   cd demo
   wget --output-document demo_pickles.zip https://dl.dropboxusercontent.com/s/4elvyix9pp36469/demo_pickles.zip?dl=0
