@@ -6,7 +6,7 @@ This repository is the official open-source implementation of the paper Spectral
 > IEEE Robotics and Automation Letters (RA-L), Volume 8, Issue 5, May 2023. [arXiv](https://arxiv.org/abs/2210.04432), [IEEEXplore](https://ieeexplore.ieee.org/document/10065560)
 
 This repository contains the code for:
-- A quick demo of *SpectralGV* (without the need for datasets or architecture dependencies).
+- A quick [demo](#demo) of *SpectralGV* (without the need for datasets or architecture dependencies).
 - Integration of *SpectralGV* re-ranking with 3 open-source metric localization architectures ([EgoNN](https://github.com/jac99/Egonn), [LCDNet](https://github.com/robot-learning-freiburg/LCDNet) and [LoGG3D-Net](https://github.com/csiro-robotics/LoGG3D-Net)).
 - Evaluation of place recognition and metric localization with and without re-ranking on 5 open-source datasets ([MulRan](https://sites.google.com/view/mulran-pr/download), [Apollo-Southbay](https://developer.apollo.auto/southbay.html), [KITTI](http://semantic-kitti.org/dataset.html#download), [ALITA](https://github.com/MetaSLAM/ALITA) and [KITTI-360](https://www.cvlibs.net/datasets/kitti-360/user_login.php)).
 
@@ -57,7 +57,7 @@ Now you can run the quick demo:
 <details>
   <summary><b>Demo</b></summary><br/>
   
-  This demo script re-creates the results of Tab. 2 in our paper on the KITTI360 09 dataset. It outputs results for place recognition both with and without re-ranking using SpectralGV, RANSAC-GV and alpha-QE.
+  This demo re-creates the results of Tab. 2 and Fig. 3 in our paper on the KITTI-360 09 dataset. It outputs results for place recognition both with and without re-ranking using SpectralGV, RANSAC-GV and alpha-QE.
   - Download the demo data (~75 MB) from Dropbox [here](https://www.dropbox.com/sh/qj5l2dh6gvm81a1/AAA32JqPMnQTuELPodY14xETa?dl=0):
   ```bash
   cd demo
@@ -90,6 +90,8 @@ Now you can run the quick demo:
   - alpha-QE shows decreasing performance with increasing ```n_topk``` and is therefore not suitable for point cloud re-ranking. 
   - Out of the 2 geometric verifciation methods, RANSAC-GV is inefficient at high ```n_topk``` values, thus limiting it's practical use. SpectralGV maintains almost constant runtime.
 
+  <img src="./docs/reranking_comparison.PNG" width="400">
+
 </details>
 
 <br />
@@ -99,7 +101,7 @@ Now you can run the quick demo:
 ### Environment dependencies
 This project has been tested on Ubuntu 22.04. Set up the requirements as follows:
 
-- Please set up the base conda environment and test the quick demo above. 
+- Please set up the base conda environment and test the quick [demo](#demo) above. 
 - To recreate other results in the paper, the following dependencies are required:
 
 <details>
@@ -247,6 +249,9 @@ For EgoNN we use the pre-trained model released by its authours (which is traine
 <br />
 
 ## Evaluation
+
+This section re-creates the results of Tab. 3, Tab. 4 and Tab. 5 in our paper.
+
 We integrate *SpectralGV* with the following architectures: 
 
 <details>
@@ -282,6 +287,10 @@ We integrate *SpectralGV* with the following architectures:
   TODO. 
 
 </details>
+
+<br />
+
+![](./docs/qualitative_rerank.png)
 
 <br />
 

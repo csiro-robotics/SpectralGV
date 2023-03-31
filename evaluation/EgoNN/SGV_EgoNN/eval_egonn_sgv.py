@@ -21,6 +21,7 @@ from sgv_utils import *
 
 sys.path.append(os.path.join(os.path.dirname(__file__), '../../../../../'))
 from datasets.base_datasets import get_pointcloud_loader
+from datasets.kitti360.utils import kitti360_relative_pose
 
 sys.path.append(os.path.join(os.path.dirname(__file__), '../../'))
 from misc.poses import m2ypr, relative_pose
@@ -266,6 +267,10 @@ class MetLocEvaluator(Evaluator):
                     T_gt = relative_pose(query_pose, nn_pose)
                 elif self.dataset_type == 'kitti':
                     T_gt = kitti_relative_pose(query_pose, nn_pose)
+                elif self.dataset_type == 'alita':
+                    T_gt = relative_pose(query_pose, nn_pose)
+                elif self.dataset_type == 'kitti360':
+                    T_gt = kitti360_relative_pose(query_pose, nn_pose)
                 else:
                     raise NotImplementedError('Unknown dataset type')
 
@@ -277,12 +282,12 @@ class MetLocEvaluator(Evaluator):
                     query_pc = self.pc_loader(query_filepath)
                     map_filepath = os.path.join(self.dataset_root, self.eval_set.map_set[nn_idx].rel_scan_filepath)
                     map_pc = self.pc_loader(map_filepath)
-                    if self.dataset_type in ['mulran', 'kitti']:
+                    if self.dataset_type in ['mulran', 'kitti', 'kitti360']:
                         query_pc = preprocess_pointcloud(query_pc, remove_zero_points=True,
                                                          min_x=-80, max_x=80, min_y=-80, max_y=80, min_z=-0.9)
                         map_pc = preprocess_pointcloud(map_pc, remove_zero_points=True,
                                                          min_x=-80, max_x=80, min_y=-80, max_y=80, min_z=-0.9)
-                    elif self.dataset_type == 'southbay':
+                    elif self.dataset_type in ['southbay', 'alita']:
                         # -1.6 removes most of the ground plane
                         query_pc = preprocess_pointcloud(query_pc, remove_zero_points=True,
                                                          min_x=-100, max_x=100, min_y=-100, max_y=100, min_z=-1.6)
@@ -311,9 +316,9 @@ class MetLocEvaluator(Evaluator):
                     metrics[eval_mode]['failure_inliers'].append(inliers)
                 else:
                     metrics[eval_mode]['success'].append(1.)
-                    metrics[eval_mode]['rte'].append(rte)
-                    metrics[eval_mode]['rre'].append(rre)
                     metrics[eval_mode]['success_inliers'].append(inliers)
+                metrics[eval_mode]['rte'].append(rte)
+                metrics[eval_mode]['rre'].append(rre)
 
                 if self.icp_refine:
                     # calc errors using refined pose
@@ -326,10 +331,10 @@ class MetLocEvaluator(Evaluator):
                         metrics[eval_mode]['success_refined'].append(0.)
                         metrics[eval_mode]['failure_inliers_refined'].append(inliers)
                     else:
-                        metrics[eval_mode]['rte_refined'].append(rte_refined)
-                        metrics[eval_mode]['rre_refined'].append(rre_refined)
                         metrics[eval_mode]['success_refined'].append(1.)
                         metrics[eval_mode]['success_inliers_refined'].append(inliers)
+                    metrics[eval_mode]['rte_refined'].append(rte_refined)
+                    metrics[eval_mode]['rre_refined'].append(rre_refined)
 
         # Calculate mean metrics
         global_metrics["recall"] = {r: [global_metrics['tp'][r][nn] / self.n_samples for nn in range(self.k)] for r in self.radius}
