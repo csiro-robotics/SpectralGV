@@ -15,10 +15,10 @@ This repository contains the code for:
 - [x] Add dataset preparation instructions
 - [x] Add quick demo
 - [x] Add SpectralGV + EgoNN
+- [x] Add SpectralGV + LoGG3D-Net
 - [ ] Add SpectralGV + LCDNet
-- [ ] Add SpectralGV + LoGG3D-Net
 
-## Method overview.
+## Method overview
 *SpectralGV* is an efficient spectral method for geometric verification based re-ranking of point clouds. *SpectralGV* allows integration with any metric-localization architecture that extracts both local and global features for a given point cloud, without modifying the architectures and without further training of learning-based methods. 
 
 ![](./docs/reranking_pipeline.png)
@@ -99,7 +99,7 @@ Now you can run the quick demo:
 ## Prerequisites
 
 ### Environment dependencies
-This project has been tested on Ubuntu 22.04. Set up the requirements as follows:
+This project has been tested on a system with Ubuntu 22.04 and an RTX 2080. Set up the requirements as follows:
 
 - Please set up the base conda environment and test the quick [demo](#demo) above. 
 - To recreate other results in the paper, the following dependencies are required:
@@ -242,12 +242,6 @@ Our test set for each dataset is defined in pickle format.
 
 <br />
 
-### Pretrained models
-We release the pre-trained models for LCDNet and LoGG3D-Net via Dropbox [here](https://www.dropbox.com/sh/qj5l2dh6gvm81a1/AAA32JqPMnQTuELPodY14xETa?dl=0). 
-For EgoNN we use the pre-trained model released by its authours (which is trained on the same train set).
-
-<br />
-
 ## Evaluation
 
 This section re-creates the results of Tab. 3, Tab. 4 and Tab. 5 in our paper.
@@ -275,16 +269,26 @@ We integrate *SpectralGV* with the following architectures:
 </details>
 
 <details>
-  <summary><b>LCDNet + SpectralGV</b></summary><br/>
+  <summary><b>LoGG3D-Net + SpectralGV</b></summary><br/>
 
-  TODO.
+  - Download the pre-trained model (~103 MB) from Dropbox [here](https://www.dropbox.com/sh/qj5l2dh6gvm81a1/AAA32JqPMnQTuELPodY14xETa?dl=0):
+  ```
+  cd evaluation/LoGG3D-Net/
+  wget --output-document logg3d.pth https://dl.dropboxusercontent.com/s/2mghsmkbz8p7ntx/logg3d.pth?dl=0
+  ```
+  - Evaluate place recognition and metric localization with and without *SpectralGV* re-ranking:
+  ```
+  python eval_logg3d_sgv.py --dataset_type <dataset_eg_'kitti'> --dataset_root <dataset_root_path>
+  ```
+
+  > **Note**: LoGG3D-Net does not support the parallel implementation fo *SpectralGV* as it outputs a varying number of local features/points for each point cloud. 
 
 </details>
 
 <details>
-  <summary><b>LoGG3D-Net + SpectralGV</b></summary><br/>
+  <summary><b>LCDNet + SpectralGV</b></summary><br/>
 
-  TODO. 
+  TODO.
 
 </details>
 

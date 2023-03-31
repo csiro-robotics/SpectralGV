@@ -81,6 +81,40 @@ def make_open3d_point_cloud(xyz, color=None):
         pcd.colors = o3d.utility.Vector3dVector(color)
     return pcd
 
+def preprocess_pointcloud(pc, remove_zero_points: bool = False,
+                 min_x: float = None, max_x: float = None,
+                 min_y: float = None, max_y: float = None,
+                 min_z: float = None, max_z: float = None):
+    if remove_zero_points:
+        mask = np.all(np.isclose(pc, 0.), axis=1)
+        pc = pc[~mask]
+
+    if min_x is not None:
+        mask = pc[:, 0] > min_x
+        pc = pc[mask]
+
+    if max_x is not None:
+        mask = pc[:, 0] <= max_x
+        pc = pc[mask]
+
+    if min_y is not None:
+        mask = pc[:, 1] > min_y
+        pc = pc[mask]
+
+    if max_y is not None:
+        mask = pc[:, 1] <= max_y
+        pc = pc[mask]
+
+    if min_z is not None:
+        mask = pc[:, 2] > min_z
+        pc = pc[mask]
+
+    if max_z is not None:
+        mask = pc[:, 2] <= max_z
+        pc = pc[mask]
+
+    return pc
+
 
 class PointCloudLoader:
     # Generic point cloud loader class
