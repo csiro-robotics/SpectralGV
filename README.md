@@ -10,13 +10,6 @@ This repository contains the code for:
 - Integration of *SpectralGV* re-ranking with 3 open-source metric localization architectures ([EgoNN](https://github.com/jac99/Egonn), [LCDNet](https://github.com/robot-learning-freiburg/LCDNet) and [LoGG3D-Net](https://github.com/csiro-robotics/LoGG3D-Net)).
 - Evaluation of place recognition and metric localization with and without re-ranking on 5 open-source datasets ([MulRan](https://sites.google.com/view/mulran-pr/download), [Apollo-Southbay](https://developer.apollo.auto/southbay.html), [KITTI](http://semantic-kitti.org/dataset.html#download), [ALITA](https://github.com/MetaSLAM/ALITA) and [KITTI-360](https://www.cvlibs.net/datasets/kitti-360/user_login.php)).
 
-### UPDATES
-- [x] Add environment setup instructions 
-- [x] Add dataset preparation instructions
-- [x] Add quick demo
-- [x] Add SpectralGV + EgoNN
-- [x] Add SpectralGV + LoGG3D-Net
-- [ ] Add SpectralGV + LCDNet
 
 ## Method overview
 *SpectralGV* is an efficient spectral method for geometric verification based re-ranking of point clouds. *SpectralGV* allows integration with any metric-localization architecture that extracts both local and global features for a given point cloud, without modifying the architectures and without further training of learning-based methods. 
@@ -155,7 +148,6 @@ This project has been tested on a system with Ubuntu 22.04 and an RTX 2080. Set 
 <details>
   <summary><b>Add dependencies for LCDNet:</b></summary><br/>
 
-  TODO.
   > **Note**: You will need to create a separate conda environment for LCDNet. See here for details: https://github.com/robot-learning-freiburg/LCDNet
 
 </details>
@@ -288,7 +280,25 @@ We integrate *SpectralGV* with the following architectures:
 <details>
   <summary><b>LCDNet + SpectralGV</b></summary><br/>
 
-  TODO.
+  - Clone the [LCDNet](https://github.com/robot-learning-freiburg/LCDNet) codebase into ```evaluation/LCDNet/```.
+  ```
+  cd evaluation/LCDNet
+  git clone https://github.com/robot-learning-freiburg/LCDNet.git
+  ```
+  - Copy our re-ranking eval script into the EgoNN code base:
+  ```
+  cp -r SGV_LCDNet/ LCDNet/evaluation/
+  cd LCDNet/
+  ```
+  - Download the pre-trained model (~142 MB) from Dropbox [here](https://www.dropbox.com/sh/qj5l2dh6gvm81a1/AAA32JqPMnQTuELPodY14xETa?dl=0):
+  ```
+  wget --output-document lcdnet.tar https://dl.dropboxusercontent.com/s/52sis2grvxias7u/lcdnet.tar?dl=0
+  mkdir checkpoints && mv lcdnet.tar ./checkpoints/
+  ```
+  - Evaluate place recognition and metric localization with and without *SpectralGV* re-ranking:
+  ```
+  python evaluation/SGV_LCDNet/eval_lcdnet_sgv.py --dataset_type <dataset_eg_'kitti'> --dataset_root <dataset_root_path>
+  ```
 
 </details>
 
