@@ -77,7 +77,7 @@ def sgv(src_keypts, tgt_keypts, src_features, tgt_features, d_thresh=5.0):
     sc_score_list = np.squeeze(sc_score_list.cpu().detach().numpy())
     return sc_score_list
 
-def sgv_fn(query_keypoints, candidate_keypoints, d_thresh=5.0):
+def sgv_fn(query_keypoints, candidate_keypoints, d_thresh=5.0, max_points=15000):
 
     kp1 = query_keypoints['keypoints']
     kp2 = candidate_keypoints['keypoints']
@@ -87,6 +87,7 @@ def sgv_fn(query_keypoints, candidate_keypoints, d_thresh=5.0):
     # draw_registration_result(kp1, kp2, np.eye(4))
 
     min_num_feat = min(len(kp1),len(kp2))
+    min_num_feat = min(min_num_feat, max_points)
     kp1 = kp1[:min_num_feat]
     kp2 = kp2[:min_num_feat]
     f1 = f1[:min_num_feat]
